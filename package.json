@@ -1,0 +1,175 @@
+{
+  "name": "selyh",
+  "displayName": "Selyh",
+  "description": "Check-ins de un toque en pausas naturales, tu carga frente a tu propio ritmo y pausas breves guiadas, sin salir del editor.",
+  "version": "0.1.0",
+  "publisher": "selyh",
+  "license": "UNLICENSED",
+  "icon": "media/icon.png",
+  "galleryBanner": {
+    "color": "#6363F1",
+    "theme": "dark"
+  },
+  "homepage": "https://selyh.fun",
+  "engines": {
+    "vscode": "^1.146.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "bienestar",
+    "pausas",
+    "estrés",
+    "check-in",
+    "salud mental"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "selyh.menu",
+        "title": "Menú",
+        "category": "Selyh"
+      },
+      {
+        "command": "selyh.link",
+        "title": "Vincular cuenta",
+        "category": "Selyh"
+      },
+      {
+        "command": "selyh.checkIn",
+        "title": "Check-in",
+        "category": "Selyh"
+      },
+      {
+        "command": "selyh.pause",
+        "title": "Una pausa breve",
+        "category": "Selyh"
+      },
+      {
+        "command": "selyh.scale",
+        "title": "Responder escala",
+        "category": "Selyh"
+      },
+      {
+        "command": "selyh.snooze",
+        "title": "Pausar avisos",
+        "category": "Selyh"
+      },
+      {
+        "command": "selyh.status",
+        "title": "Mi estado",
+        "category": "Selyh"
+      },
+      {
+        "command": "selyh.preferences",
+        "title": "Modo foco y horas de silencio",
+        "category": "Selyh"
+      },
+      {
+        "command": "selyh.consent",
+        "title": "Permisos",
+        "category": "Selyh"
+      },
+      {
+        "command": "selyh.privacy",
+        "title": "Qué se envía hoy",
+        "category": "Selyh"
+      },
+      {
+        "command": "selyh.openPanel",
+        "title": "Abrir mi panel",
+        "category": "Selyh"
+      },
+      {
+        "command": "selyh.help",
+        "title": "Líneas de ayuda",
+        "category": "Selyh"
+      },
+      {
+        "command": "selyh.unlink",
+        "title": "Cerrar sesión",
+        "category": "Selyh"
+      }
+    ],
+    "configuration": {
+      "title": "Selyh",
+      "properties": {
+        "selyh.apiUrl": {
+          "type": "string",
+          "default": "https://selyhbackend-production.up.railway.app",
+          "description": "URL de la API de Selyh. Para desarrollo local: http://localhost:3000.",
+          "scope": "application"
+        },
+        "selyh.webUrl": {
+          "type": "string",
+          "default": "https://selyh.fun",
+          "description": "URL de la web de Selyh (aprobar el código de vinculación y abrir tu panel).",
+          "scope": "application"
+        },
+        "selyh.workHours.start": {
+          "type": "string",
+          "default": "09:00",
+          "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+          "description": "Inicio de tu horario laboral (HH:MM). Sirve para separar el trabajo fuera de horario."
+        },
+        "selyh.workHours.end": {
+          "type": "string",
+          "default": "18:00",
+          "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$",
+          "description": "Fin de tu horario laboral (HH:MM)."
+        },
+        "selyh.workHours.weekends": {
+          "type": "boolean",
+          "default": false,
+          "description": "Trabajo también los fines de semana."
+        }
+      }
+    },
+    "icons": {
+      "selyh-isotipo": {
+        "description": "Isotipo de Selyh",
+        "default": {
+          "fontPath": "media/selyh-icons.woff",
+          "fontCharacter": "\\E000"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test",
+    "vsix": "vsce package --allow-missing-repository"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.146.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "24.x",
+    "typescript-eslint": "^8.61.1",
+    "eslint": "^10.5.0",
+    "esbuild": "^0.28.1",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^6.0.3",
+    "@vscode/test-cli": "^0.0.15",
+    "@vscode/test-electron": "^3.0.0",
+    "@vscode/vsce": "^4.1.1"
+  },
+  "overrides": {
+    "diff": "^8.0.4",
+    "serialize-javascript": "^7.0.6"
+  }
+}
